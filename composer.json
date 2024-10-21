@@ -1,0 +1,71 @@
+{
+    "name": "rudashi/printer-adapter",
+    "description": "PHP Adapter for printing machines",
+    "version": "1.0.0",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "adapter",
+        "printing",
+        "machine"
+    ],
+    "authors": [
+        {
+            "name": "Borys Żmuda",
+            "email": "rudashi@gmail.com",
+            "homepage": "https://rudashi.github.io"
+        }
+    ],
+    "require": {
+        "php": "^8.3"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "pestphp/pest": "^3.4",
+        "phpbench/phpbench": "^1.3",
+        "phpstan/phpstan": "^1.12",
+        "rector/rector": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ani\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ani\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "static:cs-fixer": "php-cs-fixer check --show-progress=dots -vvv",
+        "static:phpstan": "phpstan analyze --memory-limit=-1",
+        "test:pint": [
+            "@static:cs-fixer",
+            "@static:phpstan"
+        ],
+        "test:refactor": "rector --dry-run",
+        "test:arch": "pest --filter=arch",
+        "test:unit": "pest --testsuite=unit",
+        "test:integration": "pest --testsuite=integration",
+        "test:mutation": "pest --mutate",
+        "test:benchmark": "phpbench run --report=flow-report",
+        "test": [
+            "@test:pint",
+            "@test:refactor",
+            "@test:arch",
+            "@test:unit",
+            "@test:integration",
+            "@test:benchmark",
+            "@test:mutation"
+        ]
+    }
+}

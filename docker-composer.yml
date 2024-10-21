@@ -1,0 +1,10 @@
+services:
+  adapter-php:
+    build:
+      dockerfile: Dockerfile
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      VAR_DUMPER_FORMAT: server
+    volumes:
+      - '.:/var/www/html'
